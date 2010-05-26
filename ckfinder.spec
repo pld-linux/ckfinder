@@ -2,7 +2,7 @@ Summary:	AJAX file manager for web browsers
 Summary(pl.UTF-8):	Edytor tekstowy dla Internetu
 Name:		ckfinder
 Version:	1.4.2
-Release:	0.19
+Release:	0.20
 License:	Custom
 Group:		Applications/WWW
 Source0:	http://download.cksource.com/CKFinder/CKFinder%20for%20PHP/%{version}/%{name}_php_%{version}.tar.gz
@@ -10,10 +10,11 @@ Source0:	http://download.cksource.com/CKFinder/CKFinder%20for%20PHP/%{version}/%
 URL:		http://www.ckfinder.com/
 Patch0:		error_reporting.patch
 Patch1:		paths.patch
+Patch2:		config.patch
 Source1:	find-lang.sh
 Source2:	apache.conf
 Source3:	lighttpd.conf
-BuildRequires:	rpmbuild(macros) > 1.268
+BuildRequires:	rpmbuild(macros) >= 1.565
 BuildRequires:	sed >= 4.0
 #Requires:	php-gd
 Requires:	webapps
@@ -71,11 +72,11 @@ rm -r core/connector/php/php4
 mv core/connector/php/php5/* core/connector/php
 rmdir core/connector/php/php5
 
-# undos the files
-find '(' -name '*.js' -o -name '*.css' -o -name '*.txt' -o -name '*.html' -o -name '*.php' ')' -print0 | xargs -0 sed -i -e 's,\r$,,'
+%undos -f js,css,txt,html,php
 
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %install
 rm -rf $RPM_BUILD_ROOT
