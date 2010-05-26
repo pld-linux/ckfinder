@@ -2,12 +2,13 @@ Summary:	AJAX file manager for web browsers
 Summary(pl.UTF-8):	Edytor tekstowy dla Internetu
 Name:		ckfinder
 Version:	1.4.2
-Release:	0.18
+Release:	0.19
 License:	Custom
 Group:		Applications/WWW
 Source0:	http://download.cksource.com/CKFinder/CKFinder%20for%20PHP/%{version}/%{name}_php_%{version}.tar.gz
 # Source0-md5:	0f37b528272f915b9fcd3a12e2f53439
 URL:		http://www.ckfinder.com/
+Patch0:		error_reporting.patch
 Source1:	find-lang.sh
 Source2:	apache.conf
 Source3:	lighttpd.conf
@@ -71,6 +72,8 @@ rmdir core/connector/php/php5
 
 # undos the files
 find '(' -name '*.js' -o -name '*.css' -o -name '*.txt' -o -name '*.html' -o -name '*.php' ')' -print0 | xargs -0 sed -i -e 's,\r$,,'
+
+%patch0 -p1
 
 %install
 rm -rf $RPM_BUILD_ROOT

@@ -1,0 +1,15 @@
+--- ckfinder-1.4.2/./core/connector/php/connector.php~	2010-05-26 19:50:10.000000000 +0300
++++ ckfinder-1.4.2/./core/connector/php/connector.php	2010-05-26 19:50:50.329046561 +0300
+@@ -20,12 +20,6 @@
+  */
+ 
+ /**
+- * Protect against sending warnings to the browser (#186).
+- * Comment out this line during debugging. 
+- */
+-error_reporting(0);
+-
+-/**
+  * Protect against sending content before all HTTP headers are sent (#186).
+  */
+ ob_start();
