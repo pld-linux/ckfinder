@@ -9,6 +9,7 @@ Source0:	http://download.cksource.com/CKFinder/CKFinder%20for%20PHP/%{version}/%
 # Source0-md5:	0f37b528272f915b9fcd3a12e2f53439
 URL:		http://www.ckfinder.com/
 Patch0:		error_reporting.patch
+Patch1:		paths.patch
 Source1:	find-lang.sh
 Source2:	apache.conf
 Source3:	lighttpd.conf
@@ -74,6 +75,7 @@ rmdir core/connector/php/php5
 find '(' -name '*.js' -o -name '*.css' -o -name '*.txt' -o -name '*.html' -o -name '*.php' ')' -print0 | xargs -0 sed -i -e 's,\r$,,'
 
 %patch0 -p1
+%patch1 -p1
 
 %install
 rm -rf $RPM_BUILD_ROOT

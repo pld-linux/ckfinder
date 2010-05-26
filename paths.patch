@@ -1,5 +1,5 @@
---- php/constants.php~	2010-02-16 13:30:42.000000000 +0200
-+++ php/constants.php	2010-02-16 13:36:02.329273954 +0200
+--- ckfinder-1.4.2/core/connector/php/constants.php~	2010-02-16 13:30:42.000000000 +0200
++++ ckfinder-1.4.2/core/connector/php/constants.php	2010-02-16 13:36:02.329273954 +0200
 @@ -48,7 +48,7 @@
  
  define('CKFINDER_CONNECTOR_DEFAULT_USER_FILES_PATH',"/userfiles/");
