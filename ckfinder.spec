@@ -2,7 +2,7 @@ Summary:	AJAX file manager for web browsers
 Summary(pl.UTF-8):	Edytor tekstowy dla Internetu
 Name:		ckfinder
 Version:	1.4.2
-Release:	0.20
+Release:	0.21
 License:	Custom
 Group:		Applications/WWW
 Source0:	http://download.cksource.com/CKFinder/CKFinder%20for%20PHP/%{version}/%{name}_php_%{version}.tar.gz
@@ -72,6 +72,9 @@ rm -r core/connector/php/php4
 mv core/connector/php/php5/* core/connector/php
 rmdir core/connector/php/php5
 
+# kill core/ in path
+%{__grep} -r core/ . -l | xargs %{__sed} -i -e 's,core/,,'
+
 %undos -f js,css,txt,html,php
 
 %patch0 -p1
@@ -84,6 +87,7 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_appdir},%{php_data_dir},/var/lib/%{
 
 cp -a ckfinder.js $RPM_BUILD_ROOT%{_appdir}
 cp -a core/* $RPM_BUILD_ROOT%{_appdir}
+cp -a ckfinder.html $RPM_BUILD_ROOT%{_appdir}
 cp -a config.php $RPM_BUILD_ROOT%{_sysconfdir}
 cp -a ckfinder.php $RPM_BUILD_ROOT%{php_data_dir}
 
@@ -93,7 +97,6 @@ cp -a %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/lighttpd.conf
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 cp -a _samples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
-cp -a ckfinder.html $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %find_lang %{name}.lang
 
@@ -132,6 +135,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_appdir}/help
 %dir %{_appdir}/skins
 %{_appdir}/ckfinder.js
+%{_appdir}/ckfinder.html
 %{_appdir}/css
 %{_appdir}/images
 %{_appdir}/js
