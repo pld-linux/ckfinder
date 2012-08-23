@@ -2,7 +2,7 @@ Summary:	AJAX file manager for web browsers
 Summary(pl.UTF-8):	Edytor tekstowy dla Internetu
 Name:		ckfinder
 Version:	1.4.2
-Release:	1
+Release:	2
 License:	Custom
 Group:		Applications/WWW
 Source0:	http://download.cksource.com/CKFinder/CKFinder%20for%20PHP/%{version}/%{name}_php_%{version}.tar.gz
@@ -50,7 +50,7 @@ Summary:	File Manager Connector for PHP
 Summary(pl.UTF-8):	Interfejs zarządcy plików do PHP
 Group:		Applications/WWW
 Requires:	%{name} = %{version}-%{release}
-Requires:	php-common >= 4:5.0.0
+Requires:	php(core) >= 5.0.0
 Requires:	php-gd
 
 %description connector-php
