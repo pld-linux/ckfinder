@@ -2,7 +2,7 @@ Summary:	AJAX file manager for web browsers
 Summary(pl.UTF-8):	Edytor tekstowy dla Internetu
 Name:		ckfinder
 Version:	1.4.2
-Release:	2
+Release:	3
 License:	Custom
 Group:		Applications/WWW
 Source0:	http://download.cksource.com/CKFinder/CKFinder%20for%20PHP/%{version}/%{name}_php_%{version}.tar.gz
@@ -14,6 +14,7 @@ Patch2:		config.patch
 Source1:	find-lang.sh
 Source2:	apache.conf
 Source3:	lighttpd.conf
+Source4:	httpd.conf
 BuildRequires:	rpmbuild(macros) >= 1.565
 BuildRequires:	sed >= 4.0
 #Requires:	php-gd
@@ -21,6 +22,7 @@ Requires:	webapps
 Requires:	webserver
 Requires:	webserver(access)
 Requires:	webserver(alias)
+Conflicts:	apache-base < 2.4.0-1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -92,7 +94,7 @@ cp -a config.php $RPM_BUILD_ROOT%{_sysconfdir}
 cp -a ckfinder.php $RPM_BUILD_ROOT%{php_data_dir}
 
 cp -a %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
-cp -a %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
+cp -a %{SOURCE4} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
 cp -a %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/lighttpd.conf
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
@@ -106,10 +108,10 @@ cp -a _samples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 %triggerun -- apache1 < 1.3.37-3, apache1-base
 %webapp_unregister apache %{_webapp}
 
-%triggerin -- apache < 2.2.0, apache-base
+%triggerin -- apache-base
 %webapp_register httpd %{_webapp}
 
-%triggerun -- apache < 2.2.0, apache-base
+%triggerun -- apache-base
 %webapp_unregister httpd %{_webapp}
 
 %triggerin -- lighttpd
