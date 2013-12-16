@@ -1,18 +1,9 @@
---- ckfinder-1.4.2/./config.php~	2010-05-27 00:51:09.000000000 +0300
-+++ ckfinder-1.4.2/./config.php	2010-05-27 01:01:52.779214666 +0300
-@@ -267,10 +267,16 @@
- Set to 0 to disable this feature.
- Note: not needed on Windows-based servers.
- */
--$config['ChmodFiles'] = 0777 ;
-+$config['ChmodFiles'] = 0777;
- 
- /*
- See comments above.
- Used when creating folders that does not exist.
- */
--$config['ChmodFolders'] = 0755 ;
-+$config['ChmodFolders'] = 0755;
+--- ckfinder-2.4/config.php~	2013-12-16 13:09:51.017571971 +0200
++++ ckfinder-2.4/config.php	2013-12-16 13:10:26.263671492 +0200
+@@ -333,3 +333,9 @@
+ $config['plugin_imageresize']['smallThumb'] = '90x90';
+ $config['plugin_imageresize']['mediumThumb'] = '120x120';
+ $config['plugin_imageresize']['largeThumb'] = '180x180';
 +
 +// load additional context sensitive config
 +// use webserver setenv directives to set this variable.

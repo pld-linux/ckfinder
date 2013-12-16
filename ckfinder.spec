@@ -1,14 +1,13 @@
-Summary:	AJAX file manager for web browsers
+Summary:	CKFinder - Web File Manager
 Summary(pl.UTF-8):	Edytor tekstowy dla Internetu
 Name:		ckfinder
-Version:	1.4.2
-Release:	4
+Version:	2.4
+Release:	1
 License:	Custom
 Group:		Applications/WWW
 Source0:	http://download.cksource.com/CKFinder/CKFinder%20for%20PHP/%{version}/%{name}_php_%{version}.tar.gz
-# Source0-md5:	0f37b528272f915b9fcd3a12e2f53439
-URL:		http://www.ckfinder.com/
-Patch0:		error_reporting.patch
+# Source0-md5:	d29d9a11ec47bf639c32263503601255
+URL:		http://www.cksource.com/ckfinder
 Patch1:		paths.patch
 Patch2:		config.patch
 Source1:	find-lang.sh
@@ -64,20 +63,21 @@ Interfejs zarządcy plików do PHP.
 # use versioned build dir
 mv ckfinder/* .
 rmdir ckfinder
+%undos -f js,css,txt,html,php
+
+mv lang/_translationstatus.txt .
+
+# don't package
+mv plugins/dummy .
 
 # force php5 only
-rm core/ckfinder_php4.php
 mv core/ckfinder_php5.php ckfinder.php
-rm -r core/connector/php/php4
 mv core/connector/php/php5/* core/connector/php
 rmdir core/connector/php/php5
 
 # kill core/ in path
-%{__grep} -r core/ . -l | xargs %{__sed} -i -e 's,core/,,g'
+#%{__grep} -r core/ . -l | xargs %{__sed} -i -e 's,core/,,g'
 
-%undos -f js,css,txt,html,php
-
-%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 
@@ -85,11 +85,14 @@ rmdir core/connector/php/php5
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_appdir},%{php_data_dir},/var/lib/%{name}}
 
-cp -a ckfinder.js $RPM_BUILD_ROOT%{_appdir}
-cp -a core/* $RPM_BUILD_ROOT%{_appdir}
-cp -a ckfinder.html $RPM_BUILD_ROOT%{_appdir}
-cp -a config.php $RPM_BUILD_ROOT%{_sysconfdir}
-cp -a ckfinder.php $RPM_BUILD_ROOT%{php_data_dir}
+cp -p ckfinder.js $RPM_BUILD_ROOT%{_appdir}
+cp -p ckfinder_v1.js $RPM_BUILD_ROOT%{_appdir}
+cp -p ckfinder.html $RPM_BUILD_ROOT%{_appdir}
+cp -p ckfinder.php $RPM_BUILD_ROOT%{php_data_dir}
+cp -p config.php $RPM_BUILD_ROOT%{_sysconfdir}
+cp -p config.js $RPM_BUILD_ROOT%{_sysconfdir}
+
+cp -a core help lang plugins skins $RPM_BUILD_ROOT%{_appdir}
 
 cp -a %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
 cp -a %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
@@ -123,31 +126,39 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc changelog.txt install.txt license.txt
+%doc changelog.txt install.txt license.txt translations.txt
 %dir %attr(750,root,http) %{_sysconfdir}
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/apache.conf
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/lighttpd.conf
 %attr(640,root,http) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/config.php
+%attr(640,root,http) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/config.js
 
 %dir %{_appdir}
-%dir %{_appdir}/connector
-%dir %{_appdir}/help
-%dir %{_appdir}/skins
 %{_appdir}/ckfinder.js
+%{_appdir}/ckfinder_v1.js
 %{_appdir}/ckfinder.html
-%{_appdir}/css
-%{_appdir}/images
-%{_appdir}/js
-%{_appdir}/pages
 
-%{_appdir}/skins/default
-%{_appdir}/skins/office2003
-%{_appdir}/skins/silver
+%dir %{_appdir}/plugins
+%{_appdir}/plugins/fileeditor
+%{_appdir}/plugins/flashupload
+%{_appdir}/plugins/gallery
+%{_appdir}/plugins/imageresize
+%{_appdir}/plugins/watermark
+%{_appdir}/plugins/zip
 
+%dir %{_appdir}/skins
+%{_appdir}/skins/kama
+%{_appdir}/skins/v1
+
+%dir %{_appdir}/help
 %{_appdir}/help/en
-%lang(es_MX) %{_appdir}/help/es-mx
+%{_appdir}/help/files
+%lang(cs) %{_appdir}/help/cs
 %lang(es) %{_appdir}/help/es
+%lang(es_MX) %{_appdir}/help/es-mx
+%lang(fi) %{_appdir}/help/fi
+%lang(lt) %{_appdir}/help/lt
 %lang(pl) %{_appdir}/help/pl
 
 %dir %attr(770,root,http) /var/lib/%{name}
@@ -156,13 +167,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files connector-php
 %defattr(644,root,root,755)
-%dir %{_appdir}/connector/php
-%{_appdir}/connector/php/connector.php
-%{_appdir}/connector/php/constants.php
-%{_appdir}/connector/php/CommandHandler
-%{_appdir}/connector/php/Core
-%{_appdir}/connector/php/ErrorHandler
-%{_appdir}/connector/php/Utils
+%dir %{_appdir}/core
+%dir %{_appdir}/core/connector/php
+%{_appdir}/core/connector/php/connector.php
+%{_appdir}/core/connector/php/constants.php
+%{_appdir}/core/connector/php/CommandHandler
+%{_appdir}/core/connector/php/Core
+%{_appdir}/core/connector/php/ErrorHandler
+%{_appdir}/core/connector/php/Utils
 
 %files -n php-%{name}
 %defattr(644,root,root,755)
