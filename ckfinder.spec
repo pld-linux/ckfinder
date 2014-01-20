@@ -2,7 +2,7 @@ Summary:	CKFinder - Web File Manager
 Summary(pl.UTF-8):	Edytor tekstowy dla Internetu
 Name:		ckfinder
 Version:	2.4
-Release:	1
+Release:	2
 License:	Custom
 Group:		Applications/WWW
 Source0:	http://download.cksource.com/CKFinder/CKFinder%20for%20PHP/%{version}/%{name}_php_%{version}.tar.gz
@@ -168,6 +168,7 @@ rm -rf $RPM_BUILD_ROOT
 %files connector-php
 %defattr(644,root,root,755)
 %dir %{_appdir}/core
+%dir %{_appdir}/core/connector
 %dir %{_appdir}/core/connector/php
 %{_appdir}/core/connector/php/connector.php
 %{_appdir}/core/connector/php/constants.php
