@@ -2,7 +2,7 @@ Summary:	CKFinder - Web File Manager
 Summary(pl.UTF-8):	Edytor tekstowy dla Internetu
 Name:		ckfinder
 Version:	2.4
-Release:	2
+Release:	3
 License:	Custom
 Group:		Applications/WWW
 Source0:	http://download.cksource.com/CKFinder/CKFinder%20for%20PHP/%{version}/%{name}_php_%{version}.tar.gz
@@ -15,7 +15,7 @@ Source2:	apache.conf
 Source3:	lighttpd.conf
 BuildRequires:	rpmbuild(macros) >= 1.565
 BuildRequires:	sed >= 4.0
-#Requires:	php-gd
+#Requires:	php(gd)
 Requires:	webapps
 Requires:	webserver
 Requires:	webserver(access)
@@ -50,7 +50,7 @@ Summary(pl.UTF-8):	Interfejs zarządcy plików do PHP
 Group:		Applications/WWW
 Requires:	%{name} = %{version}-%{release}
 Requires:	php(core) >= 5.0.0
-Requires:	php-gd
+Requires:	php(gd)
 
 %description connector-php
 File Manager Connector for PHP.
