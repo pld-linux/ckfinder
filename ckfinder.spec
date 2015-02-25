@@ -1,12 +1,12 @@
 Summary:	CKFinder - Web File Manager
 Summary(pl.UTF-8):	Edytor tekstowy dla Internetu
 Name:		ckfinder
-Version:	2.4
-Release:	3
+Version:	2.4.2
+Release:	1
 License:	Custom
 Group:		Applications/WWW
 Source0:	http://download.cksource.com/CKFinder/CKFinder%20for%20PHP/%{version}/%{name}_php_%{version}.tar.gz
-# Source0-md5:	d29d9a11ec47bf639c32263503601255
+# Source0-md5:	7be5c7b6f1f4f958dffedd3283d5cdb2
 URL:		http://www.cksource.com/ckfinder
 Patch1:		paths.patch
 Patch2:		config.patch
