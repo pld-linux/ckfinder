@@ -78,8 +78,8 @@ rmdir core/connector/php/php5
 # kill core/ in path
 #%{__grep} -r core/ . -l | xargs %{__sed} -i -e 's,core/,,g'
 
-%patch1 -p1
-%patch2 -p1
+%patch -P1 -p1
+%patch -P2 -p1
 
 %install
 rm -rf $RPM_BUILD_ROOT
