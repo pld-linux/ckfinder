@@ -2,7 +2,7 @@ Summary:	CKFinder - Web File Manager
 Summary(pl.UTF-8):	Edytor tekstowy dla Internetu
 Name:		ckfinder
 Version:	2.4.2
-Release:	2
+Release:	3
 License:	Custom
 Group:		Applications/WWW
 Source0:	http://download.cksource.com/CKFinder/CKFinder%20for%20PHP/%{version}/%{name}_php_%{version}.tar.gz
@@ -29,6 +29,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_appdir		%{_datadir}/%{name}
 
 %define		find_lang	sh %{SOURCE1}
+
+%define		_noautoreq_pear	plugins/*/.*.php
 
 %description
 CKFinder is a powerful and easy to use AJAX file manager for web
