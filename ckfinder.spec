@@ -13,7 +13,8 @@ Patch2:		config.patch
 Source1:	find-lang.sh
 Source2:	apache.conf
 Source3:	lighttpd.conf
-BuildRequires:	rpmbuild(macros) >= 1.565
+BuildRequires:	rpm-php-pearprov
+BuildRequires:	rpmbuild(macros) >= 1.654
 BuildRequires:	sed >= 4.0
 #Requires:	php(gd)
 Requires:	webapps
