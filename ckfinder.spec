@@ -5,9 +5,9 @@ Version:	2.4.2
 Release:	3
 License:	Custom
 Group:		Applications/WWW
-Source0:	http://download.cksource.com/CKFinder/CKFinder%20for%20PHP/%{version}/%{name}_php_%{version}.tar.gz
+Source0:	https://download.cksource.com/CKFinder/CKFinder%20for%20PHP/%{version}/%{name}_php_%{version}.tar.gz
 # Source0-md5:	7be5c7b6f1f4f958dffedd3283d5cdb2
-URL:		http://www.cksource.com/ckfinder
+URL:		https://ckeditor.com/ckfinder/
 Patch1:		paths.patch
 Patch2:		config.patch
 Source1:	find-lang.sh
@@ -63,18 +63,18 @@ Interfejs zarządcy plików do PHP.
 %prep
 %setup -qc
 # use versioned build dir
-mv ckfinder/* .
+%{__mv} ckfinder/* .
 rmdir ckfinder
 %undos -f js,css,txt,html,php
 
-mv lang/_translationstatus.txt .
+%{__mv} lang/_translationstatus.txt .
 
 # don't package
-mv plugins/dummy .
+%{__mv} plugins/dummy .
 
 # force php5 only
-mv core/ckfinder_php5.php ckfinder.php
-mv core/connector/php/php5/* core/connector/php
+%{__mv} core/ckfinder_php5.php ckfinder.php
+%{__mv} core/connector/php/php5/* core/connector/php
 rmdir core/connector/php/php5
 
 # kill core/ in path
